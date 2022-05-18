@@ -1,0 +1,12 @@
+anyio==3.6.1
+certifi==2021.10.8
+charset-normalizer==2.0.12
+fastapi==0.78.0
+idna==3.3
+pydantic==1.9.0
+requests==2.27.1
+sniffio==1.2.0
+starlette==0.19.1
+typing_extensions==4.2.0
+urllib3==1.26.9
+git+https://github.com/AustinHellerRepo/Common
