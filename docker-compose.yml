@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     command: gunicorn api.main:app --bind 0.0.0.0:38160 -w 4 -k uvicorn.workers.UvicornWorker
+    environment:
+      - PYTHONUNBUFFERED=1
     expose:
       - 38160
     ports:

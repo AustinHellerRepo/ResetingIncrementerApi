@@ -104,6 +104,7 @@ class ResetingIncrementer():
 		)
 
 	def increment(self, *, key: str, value: float):
+		print(f"{datetime.utcnow()}: incrementing {key}: {value}")
 		self.__lock.acquire(True)
 		try:
 			self.__try_reset()
@@ -118,18 +119,21 @@ class ResetingIncrementer():
 			total_limit = self.__total_limit
 
 			if incremented_value > value_limit:
+				print(f"{datetime.utcnow()}: key over limit")
 				raise IncrementKeyOverLimitException(
 					key_value=current_value,
 					increment_value=value,
 					key_limit=value_limit
 				)
 			elif incremented_total_value > total_limit:
+				print(f"{datetime.utcnow()}: total over limit")
 				raise IncrementTotalOverLimitException(
 					total_value=total_value,
 					increment_value=value,
 					total_limit=total_limit
 				)
 			else:
+				print(f"{datetime.utcnow()}: increment successful")
 				self.__set_value(
 					key=key,
 					value=incremented_value

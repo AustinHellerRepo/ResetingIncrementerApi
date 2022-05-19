@@ -96,39 +96,46 @@ incrementer = ResetingIncrementer(
 
 @app.post("/add")
 async def increment(request: Request):
-	request_json = await request.json()
-	if "key" not in request_json:
-		raise HTTPException(
-			status_code=422,
-			detail=f"Failed to find \"key\" key in input json. Found: {request_json}."
-		)
-	key = request_json["key"]
-	if "value" not in request_json:
-		raise HTTPException(
-			status_code=422,
-			detail=f"Failed to find \"value\" key in input json. Found: {request_json}."
-		)
-	value_string = request_json["value"]
+	print(f"{datetime.utcnow()}: add entrypoint started")
 	try:
-		value = float(value_string)
-	except ValueError:
-		raise HTTPException(
-			status_code=422,
-			detail=f"Failed to cast value \"{value_string}\" to float."
-		)
+		print(f"{datetime.utcnow()}: getting request json")
+		request_json = await request.json()
+		print(f"{datetime.utcnow()}: got request json: {request_json}")
 
-	try:
-		incrementer.increment(
-			key=key,
-			value=value
-		)
-	except IncrementKeyOverLimitException as ex:
-		raise HTTPException(
-			status_code=409,
-			detail=str(ex)
-		)
-	except IncrementTotalOverLimitException as ex:
-		raise HTTPException(
-			status_code=409,
-			detail=str(ex)
-		)
+		if "key" not in request_json:
+			raise HTTPException(
+				status_code=422,
+				detail=f"Failed to find \"key\" key in input json. Found: {request_json}."
+			)
+		key = request_json["key"]
+		if "value" not in request_json:
+			raise HTTPException(
+				status_code=422,
+				detail=f"Failed to find \"value\" key in input json. Found: {request_json}."
+			)
+		value_string = request_json["value"]
+		try:
+			value = float(value_string)
+		except ValueError:
+			raise HTTPException(
+				status_code=422,
+				detail=f"Failed to cast value \"{value_string}\" to float."
+			)
+
+		try:
+			incrementer.increment(
+				key=key,
+				value=value
+			)
+		except IncrementKeyOverLimitException as ex:
+			raise HTTPException(
+				status_code=409,
+				detail=str(ex)
+			)
+		except IncrementTotalOverLimitException as ex:
+			raise HTTPException(
+				status_code=409,
+				detail=str(ex)
+			)
+	finally:
+		print(f"{datetime.utcnow()}: add entrypoint ended")

@@ -5,7 +5,7 @@ import json
 import os
 
 
-base_url = "http://localhost:38160"
+base_url = "http://0.0.0.0:38160"
 headers = {}
 
 
