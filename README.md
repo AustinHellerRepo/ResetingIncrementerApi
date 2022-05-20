@@ -1,5 +1,5 @@
 # ResetingIncrementerApi
-Permits the incrementing of an internal set of float key-value pair values, reseting back to zero after a predetermined amount of time.
+Permits the incrementing of an internal set of key-value pair float values, reseting back to zero after a predetermined amount of time. It is essential that the docker container has a mounted volume to store the current state in the event that the container is stopped and restarted.
 
 ## Features
 
