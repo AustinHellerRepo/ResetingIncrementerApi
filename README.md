@@ -1,5 +1,5 @@
 # ResetingIncrementerApi
-Permits the incrementing of an internal set of values, reseting back to zero after a predetermined amount of time.
+Permits the incrementing of an internal set of float key-value pair values, reseting back to zero after a predetermined amount of time.
 
 ## Features
 
