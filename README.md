@@ -22,7 +22,7 @@ super_big_api = 4398046511104
 [TotalLimit]
 Value = 4398046511104
 ```
-The "super_big_api" is able to use the entire four terrabytes of outbound data. Once the total usage from all of the APIs hits either their respective limits or the summation hits the total limit, a 409 HTTP error code will be sent to the calling process.
+The "super_big_api" is able to use the entire four terrabytes of outbound data. Once the total usage from all of the APIs hits either their respective limits or the summation hits the total limit, a 409 HTTP error code will be sent to the calling process with an empty payload.
 
 _Reset every 24 hours with total limit of 1GB_
 ```ini
